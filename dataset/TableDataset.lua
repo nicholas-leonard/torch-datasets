@@ -388,7 +388,7 @@ function TableDataset:normalize_globally(...)
 
    local channels = {...}
    if #channels == 0 then
-      dataset.normalize(self.dataset.data)
+      normalize(self.dataset.data)
    else
       for _,c in ipairs(channels) do
          normalize(self.dataset.data[{ {}, c, {}, {} }])

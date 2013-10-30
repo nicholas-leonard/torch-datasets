@@ -5,7 +5,7 @@ require 'image'
 require 'util'
 require 'util/file'
 
-local TORCH_DIR = paths.concat(os.getenv('HOME'), '.torch')
+local TORCH_DIR = os.getenv('TORCH_DATA_PATH')
 local DATA_DIR  = paths.concat(TORCH_DIR, 'data')
 
 dataset = {}

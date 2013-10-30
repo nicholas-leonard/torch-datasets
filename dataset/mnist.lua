@@ -89,7 +89,7 @@ function Mnist.dataset(opts)
    zca_whiten    = arg.optional(opts, 'zca_whiten', false)
    size          = arg.optional(opts, 'size', test and Mnist.test_size or Mnist.size)
    sort          = arg.optional(opts, 'sort', false)
-   transform     = arg.optional(opts, 'sort', nil)
+   transform     = arg.optional(opts, 'transform', nil)
 
    local transformations = {}
 

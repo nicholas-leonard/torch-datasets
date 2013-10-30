@@ -3,23 +3,31 @@
 A collection of easy to use datasets for training and testing machine learning
 algorithms with Torch7.
 
+## Dependencies
+
+    git clone https://github.com/rosejn/lua-util.git
+    git clone https://github.com/rosejn/lua-fn.git
+    git clone https://github.com/rosejn/lua-pprint.git
+    
+    You will also need to make these acessible in the LUA_PATH 
+    environement variable.
 
 ## Usage
 
     require('dataset/mnist')
     m = Mnist.dataset()
-    d:size()                      -- => 60000
-    d:sample(100)                 -- => {data = tensor, class = label}
+    m:size()                      -- => 60000
+    m:sample(100)                 -- => {data = tensor, class = label}
 
     -- scale values between [0,1] (by default they are in the range [0,255])
-    m = dataset.Mnist({scale = {0, 1}})
+    m = Mnist.dataset({scale = {0, 1}})
 
     -- or normalize (subtract mean and divide by std)
-    m = dataset.Mnist({normalize = true})
+    m = Mnist.dataset({normalize = true})
 
     -- only import a subset of the data (imports full 60,000 samples otherwise),
     -- sorted by class label
-    m = dataset.Mnist({size = 1000, sort = true})
+    m = Mnist.dataset({size = 1000, sort = true})
 
 
 To process a randomly shuffled ordering of the dataset:
