@@ -3,14 +3,31 @@
 A collection of easy to use datasets for training and testing machine learning
 algorithms with Torch7.
 
-## Dependencies
+## Install
+
+    Dependencies:
 
     git clone https://github.com/rosejn/lua-util.git
     git clone https://github.com/rosejn/lua-fn.git
     git clone https://github.com/rosejn/lua-pprint.git
     
-    You will also need to make these acessible in the LUA_PATH 
-    environement variable.
+    You will also need to make the above acessible in the LUA_PATH 
+    environement variable. Example .bashrc file:
+    
+    export DEV_PATH=/home/username/projects
+    export LUA_PATH=";;"$DEV_PATH"/lua-pprint/?/init.lua;"
+    $DEV_PATH"/lua-util/?.lua;"$DEV_PATH"/lua-util/?/init.lua;"
+    $DEV_PATH"/lua-fn/?.lua;"$DEV_PATH"/lua    -fn/?/init.lua;"
+    $DEV_PATH"/torch-datasets/?.lua;"$DEV_PATH"/torch-datasets/?/init.lua;"
+    
+    Install these lua rocks (packages):
+    
+    sudo luarocks install unsup
+    sudo luarocks install fs
+    
+    Set the dataset directory in .bashrc file:
+    
+    export TORCH_DATA_PATH=/var/lib/torch
 
 ## Usage
 
