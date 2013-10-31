@@ -1,52 +1,13 @@
-* add fully randomized mini-batches (copy in samples)
+Model datasets and preprocessing as in Pylearn2.
 
-* modify sampler to take a batch size, and option for truly random batches
- - then remove mini_batch function
+Allow for caching (saving to disk) of proprocessed datasets, 
+for later loading (later use). 
 
-* add ability to request items by class, or get a class specific sampler
+Dont eliminate the TableDataset idea, its a good one. It indexes 
+all elements of a data table to a table of batches of elements, where 
+each batch of element is a tensor.
 
-* request samples from the dataset based on a property, such as the class
- - maybe request from the sampler, so you get the same pipeline and ordering?
- - The instances should go in to same order as was decided when creating the sampler. These for now should be:
-    * random
-    * sorted
-    * iterate through all frames of a sub-sequence (animation), then jump to another animation
-
-* Yale faces dataset (use the extended yale faces B)
-
-* berkeley segmentation dataset (500 real images)
-  - write some example code showing how to process a directory of images, sample
-    patches, write out a dataset, etc...
-
-* Add a video source
-
-* add a directory of videos source
- - or maybe just a directory iterator source, that then plugs into image or
-   video extractor
- - do both random and in order iteration in a directory (or with a given sort
-   fn)
-
-* Should each function of pipeline accept a function that returns the sample as parameter rather than the sample itself?
-
-  - we could create much mmore flexible structures
-
-```lua
-  function my_pipe_function(sampler)
-    local sample = sampler()
-    if sample == nil then return nil end
-
-    local function sample_is_awesome(sample)
-      if sample.is_blessed then
-        return true
-      else
-        return false
-      end
-    end
-
-    while not sample_is_awesome(sample) do
-       sample = sampler()
-    end
-
-    return sample
-  end
-```
+Find a way to implement multinomial sampling, where each example 
+has a probability of being sampled, and where this probability 
+is somewhat proportional to the cost (error) of the example. This 
+would require linking the training criteria to the dataset.
