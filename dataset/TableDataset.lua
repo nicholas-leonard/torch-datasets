@@ -42,6 +42,14 @@ function TableDataset:size()
    return self.dataset.data:size(1)
 end
 
+function TableDataset:inputs()
+   return self.dataset.data
+end
+
+function TableDataset:targets()
+   return self.dataset.class
+end
+
 
 -- Returns the dimensions of a single sample as a table.
 -- e.g.

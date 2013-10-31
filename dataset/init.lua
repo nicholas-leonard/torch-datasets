@@ -5,31 +5,31 @@ require 'image'
 require 'util'
 require 'util/file'
 
-local TORCH_DIR = os.getenv('TORCH_DATA_PATH')
-local DATA_DIR  = paths.concat(TORCH_DIR, 'data')
+TORCH_DIR = os.getenv('TORCH_DATA_PATH')
+DATA_DIR  = paths.concat(TORCH_DIR, 'data')
 
 dataset = {}
 -- Check locally and download dataset if not found.  Returns the path to the
 -- downloaded data file.
-function dataset.get_data(name, url)
-  local dset_dir   = paths.concat(DATA_DIR, name)
-  local data_file = paths.basename(url)
-  local data_path = paths.concat(dset_dir, data_file)
+function dataset.get_data(name, url, data_dir)
+   local dset_dir   = paths.concat(data_dir or DATA_DIR, name)
+   local data_file = paths.basename(url)
+   local data_path = paths.concat(dset_dir, data_file)
 
-  print("checking for file located at: ", data_path)
+   print("checking for file located at: ", data_path)
 
-  check_and_mkdir(TORCH_DIR)
-  check_and_mkdir(DATA_DIR)
-  check_and_mkdir(dset_dir)
-  check_and_download_file(data_path, url)
+   check_and_mkdir(TORCH_DIR)
+   check_and_mkdir(DATA_DIR)
+   check_and_mkdir(dset_dir)
+   check_and_download_file(data_path, url)
 
-  return data_path
+   return data_path
 end
 
 
 -- Downloads the data if not available locally, and returns local path.
-function dataset.data_path(name, url, file)
-    local data_path  = dataset.get_data(name, url)
+function dataset.data_path(name, url, file, data_dir)
+    local data_path  = dataset.get_data(name, url, data_dir)
     local data_dir   = paths.dirname(data_path)
     local local_path = paths.concat(data_dir, file)
 
