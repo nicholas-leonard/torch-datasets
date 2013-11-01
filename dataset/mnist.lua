@@ -12,9 +12,8 @@ require 'dataset/whitening'
 local Mnist, parent = torch.class("dataset.Mnist", "dataset.TableDataset")
 
 Mnist.name         = 'mnist'
-Mnist.dimensions   = {1, 28, 28}
-Mnist.n_dimensions = 1 * 28 * 28
-Mnist.size         = 60000
+local dimensions   = {1, 28, 28}
+local n_dimensions = 1 * 28 * 28
 Mnist.classes      = {[0] = 0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
 Mnist.url          = 'http://data.neuflow.org/data/mnist-th7.tgz'
 
@@ -91,9 +90,12 @@ function Mnist:__init(...)
    else 
       assert(false)
    end
-   samples = data:narrow(2, 1, self.n_dimensions):clone()
-   samples:resize(samples:size(1), unpack(self.dimensions))
-   labels = data:narrow(2, self.n_dimensions, 1):clone()
+   samples = data:narrow(2, 1, n_dimensions):clone()
+   samples:resize(samples:size(1), unpack(dimensions))
+   labels = data:narrow(2, n_dimensions, 1):clone()
+   -- class 0 will have index 1, class 1 index 2, and so on.
+   labels:add(1)
+   labels:resize(labels:size(1))
 
    if self.pp_sort then
       samples, labels = dataset.sort_by_class(samples, labels)
